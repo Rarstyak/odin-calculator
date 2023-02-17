@@ -55,7 +55,11 @@ function addToDisplay(e) {
     if (justOperated) {
         display.textContent = 0;
     }
-    if (parseInt(display.textContent) === 0) {
+    // We only take 16 digits
+    if (display.textContent.length >= 16) {
+        return;
+    }
+    if (parseFloat(display.textContent) === 0) {
         display.textContent = e.target.textContent;
     } else {
         display.textContent += e.target.textContent;
@@ -63,8 +67,14 @@ function addToDisplay(e) {
     justOperated = false;
 }
 
+function dot(e) {
+    if (!display.textContent.includes(".")) {
+        addToDisplay(e);
+    }
+}
+
 function compute(e) {
-    let dis = parseInt(display.textContent);
+    let dis = parseFloat(display.textContent);
     if (isNaN(dis)) {
         console.log("Not a Number");
         console.log(`Change next operator to ${e.target.textContent}`);
@@ -83,8 +93,13 @@ function compute(e) {
         justOperated = true;
         return;
     }
-    ans = operate(ans, dis, nextOperation);
+    ans = operate(parseFloat(ans), dis, nextOperation);
     console.log(`Ans: ${ans}`);
+    // We only take 16 digits
+    if (String(ans).length > 16) {
+        console.log("too long");
+        ans = String(ans).substring(0,16);
+    }
     display.textContent = ans;
 
     console.log(e.target.textContent);
@@ -103,6 +118,9 @@ btnClear.addEventListener('click', clear);
 
 const btnBack = document.querySelector('.back');
 btnBack.addEventListener('click', back);
+
+const btnDot = document.querySelector('.dot');
+btnDot.addEventListener('click', dot);
 
 const numbers = document.querySelectorAll('button.number');
 numbers.forEach(number => 

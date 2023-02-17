@@ -8,31 +8,24 @@
     background-color: lightgray;
     height: 250px;
     width: 150px;
-    border: 1px solid darkgray;
+    border: 8px solid darkgray;
     border-radius: 8px;
+    padding: 8px;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    gap: 8px;
 }
 
 .display-container {
     flex: 1;
+    border: 1px solid teal;
+    border-radius: 8px;
     padding: 8px;
-}
-
-.row-container {
-    background-color: grey;
-    flex: 4;
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 8px;
 }
 
 .display {
-    flex: 1;
-    border: 1px solid teal;
-    border-radius: 8px;
+    max-width: 100%;
     text-align: right;
 }
 
@@ -51,11 +44,8 @@ button {
 
 button.operation,
 button.clear,
-button.back {
+button.back,
+button.dot {
     background-color: aquamarine;
     border-color: aqua;
-}
-
-button.dot {
-    background-color: black;
 }
